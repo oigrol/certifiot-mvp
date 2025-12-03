@@ -64,7 +64,11 @@
         .hero p { font-size: 20px; color: var(--text-muted); max-width: 700px; margin: 0 auto 40px auto; }
 
         /* VIDEO CONTAINER */
+/* --- NUOVI STILI PER IL VIDEO OVERLAY --- */
+        
+        /* Assicura che il wrapper sia il riferimento per il posizionamento assoluto */
         .video-wrapper {
+            /* Manteniamo le tue regole esistenti */
             position: relative;
             max-width: 900px;
             margin: 0 auto 50px auto;
@@ -73,8 +77,56 @@
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             border: 1px solid rgba(255,255,255,0.1);
             background: #000;
-            aspect-ratio: 16/9; /* Mantiene il formato video */
+            aspect-ratio: 16/9;
+            /* Aggiungiamo il cursore pointer */
+            cursor: pointer; 
+        }
+
+        /* L'overlay scuro che copre il video prima del click */
+        .play-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.6); /* Sfondo blu scuro semi-trasparente */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10; /* Sta sopra il video */
+            transition: all 0.4s ease;
+        }
+
+        /* Il cerchio attorno all'icona play */
+        .play-btn-circle {
+            width: 100px; height: 100px;
+            background: rgba(255,255,255,0.05);
+            border: 3px solid var(--primary);
+            border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
+            font-size: 40px; color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+            backdrop-filter: blur(5px);
+        }
+        
+        /* Icona leggermente spostata per centrarla visivamente */
+        .play-btn-circle i { margin-left: 8px; }
+
+        /* EFFETTI HOVER: Quando passi il mouse sopra il video */
+        .video-wrapper:hover .play-btn-circle {
+            transform: scale(1.15);
+            background: var(--primary);
+            box-shadow: 0 0 60px rgba(59, 130, 246, 0.8), inset 0 0 20px rgba(255,255,255,0.5);
+            border-color: white;
+        }
+        .video-wrapper:hover .play-overlay {
+             background: rgba(15, 23, 42, 0.3); /* L'overlay diventa più chiaro */
+        }
+
+        /* Classe per far sparire l'overlay quando si clicca */
+        .hide-overlay {
+            opacity: 0;
+            pointer-events: none; /* Evita che si possa ricliccare mentre è nascosto */
+            visibility: hidden;
         }
         
         /* Overlay finto player se non c'è video */
@@ -138,7 +190,22 @@
             <h1>Compliance IoT Istantanea.<br>Senza Installazioni.</h1>
             <p>La prima piattaforma AI che automatizza la certificazione di sicurezza per dispositivi IoT. Collega, analizza, certifica.</p>
 
-            <!-- VIDEO MVP CONTAINER -->
+            <div class="video-wrapper" onclick="playVideo()">
+                
+                <video id="promoVideo" width="100%" height="100%" controls playsinline poster="cover.jpg" style="object-fit: cover;">
+                    <source src="CertifIoT_ Compliance IoT.mp4" type="video/mp4">
+                    Il tuo browser non supporta il tag video.
+                </video> 
+
+                <div class="play-overlay" id="videoOverlay">
+                    <div class="play-btn-circle">
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+                     <p style="margin-top: 20px; font-weight: 700; letter-spacing: 1px; font-size: 18px; text-transform: uppercase;">Guarda la Demo</p>
+                     <p style="font-size: 14px; color: var(--text-muted);">(Attiva l'audio)</p>
+                </div>
+            </div>
+            <!-- VIDEO MVP CONTAINER 
             <div class="video-wrapper">
                 <div class="video-placeholder">
                 <video width="100%" height="100%" controls poster="cover.jpg">
@@ -146,7 +213,7 @@
                 </video> 
             </div>
         </div>
-                <!-- 
+             
                     ISTRUZIONI PER LO STUDENTE:
                     Sostituisci questo div "video-placeholder" con il tag video reale dopo aver registrato il tuo MVP.
                     Esempio:
@@ -225,9 +292,32 @@
         &copy; 2025 Mulini - CertifIoT. All rights reserved.
     </footer>
 
+    <script>
+    function playVideo() {
+        // Prende gli elementi
+        var video = document.getElementById("promoVideo");
+        var overlay = document.getElementById("videoOverlay");
+        
+        // Se il video è in pausa, fallo partire e nascondi l'overlay
+        if (video.paused) {
+            video.play();
+            overlay.classList.add("hide-overlay");
+        } 
+        // Opzionale: se riclicchi sul video mentre va, potresti volerlo mettere in pausa.
+        // Per ora lasciamo che siano i controlli nativi a gestirlo.
+    }
+    
+    // (Opzionale) Se l'utente mette in pausa usando i controlli nativi del video,
+    // mostriamo di nuovo l'overlay per invitarlo a riprendere.
+    document.getElementById("promoVideo").addEventListener('pause', (event) => {
+      document.getElementById("videoOverlay").classList.remove("hide-overlay");
+    });
+    </script>
+
 </body>
 
 </html>
+
 
 
 
