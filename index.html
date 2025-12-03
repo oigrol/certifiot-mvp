@@ -265,29 +265,22 @@
 
     <script>
     function playVideo() {
-        // Prende gli elementi
         var video = document.getElementById("promoVideo");
         var overlay = document.getElementById("videoOverlay");
         
-        // Se il video è in pausa, fallo partire e nascondi l'overlay
-        if (video.paused) {
-            video.play();
-            overlay.classList.add("hide-overlay");
-        } 
-        // Opzionale: se riclicchi sul video mentre va, potresti volerlo mettere in pausa.
-        // Per ora lasciamo che siano i controlli nativi a gestirlo.
+        // Controlliamo se l'overlay è visibile. Se sì, lo nascondiamo e facciamo partire il video.
+        // Una volta nascosto, non tornerà più.
+        if (!overlay.classList.contains("hide-overlay")) {
+             video.play();
+             overlay.classList.add("hide-overlay");
+        }
     }
-    
-    // (Opzionale) Se l'utente mette in pausa usando i controlli nativi del video,
-    // mostriamo di nuovo l'overlay per invitarlo a riprendere.
-    document.getElementById("promoVideo").addEventListener('pause', (event) => {
-      document.getElementById("videoOverlay").classList.remove("hide-overlay");
-    });
     </script>
 
 </body>
 
 </html>
+
 
 
 
