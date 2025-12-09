@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CertifIoT | Automated IoT Compliance</title>
     
-    <!-- FAVICON (Icona nella scheda del browser) -->
+    <!-- FAVICON -->
     <link rel="icon" type="image/png" href="favicon mulini.png">
 
     <!-- META TAG PER CONDIVISIONE (LinkedIn/WhatsApp) -->
@@ -60,7 +60,7 @@
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
         
         .logo img { 
-            height: 40px; /* Ridotto leggermente per mobile */
+            height: 40px;
             width: auto; 
             vertical-align: middle;
         }
@@ -145,11 +145,11 @@
         .partners { padding: 60px 0; text-align: center; opacity: 0.6; border-top: 1px solid rgba(255,255,255,0.05); }
         .partners p { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; color: var(--text-muted); }
         
-        /* Fix per i loghi su mobile: flex-wrap */
+        /* Loghi anche su mobile: flex-wrap */
         .logo-row { 
             display: flex; justify-content: center; gap: 50px; 
             font-family: 'Space Grotesk'; font-weight: 700; font-size: 20px;
-            flex-wrap: wrap; /* Importante per mobile */
+            flex-wrap: wrap;
         }
 
         /* --- VALUE PROP CARDS --- */
@@ -168,8 +168,8 @@
         @media (max-width: 768px) {
             .hero h1 { font-size: 36px; }
             .hero { padding-top: 120px; }
-            .grid { grid-template-columns: 1fr; } /* Le card vanno una sotto l'altra */
-            .input-group { flex-direction: column; } /* Il form diventa verticale */
+            .grid { grid-template-columns: 1fr; }
+            .input-group { flex-direction: column; }
             .btn { width: 100%; text-align: center; }
             .logo img { height: 35px; }
             .logo-row { gap: 30px; font-size: 16px; }
@@ -186,7 +186,6 @@
             <a href="#" class="logo">
                 <img src="logo mulini.png" alt="Mulini CertifIoT Logo">
             </a>
-            <!-- CTA ridotta su mobile -->
             <a href="#access" class="btn btn-primary" style="padding: 10px 20px; font-size: 14px;">Accesso Beta</a>
         </div>
     </nav>
@@ -202,7 +201,7 @@
 
             <div class="video-wrapper" onclick="playVideo()">
                 
-                <!-- VIDEO (Sostituisci src se necessario) -->
+                <!-- VIDEO -->
                 <video id="promoVideo" width="100%" height="100%" controls playsinline poster="avatar.png" style="object-fit: cover;">
                     <source src="CertifIoT_ Conformità IoT video.mp4" type="video/mp4">
                     Il tuo browser non supporta il tag video.
@@ -238,7 +237,7 @@
         </div>
     </section>
 
-    <!-- PARTNERS (TRUST) -->
+    <!-- PARTNERS -->
     <section class="partners">
         <div class="container">
             <p>Tecnologia sviluppata e validata con</p>
@@ -292,5 +291,6 @@
 
 </body>
 </html>
+
 
 
