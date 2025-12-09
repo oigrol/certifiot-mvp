@@ -4,15 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CertifIoT | Automated IoT Compliance</title>
+    
+    <!-- FAVICON (Icona nella scheda del browser) -->
+    <link rel="icon" type="image/png" href="logo mulini.png">
+
+    <!-- META TAG PER CONDIVISIONE (LinkedIn/WhatsApp) -->
+    <meta property="og:title" content="CertifIoT - Compliance IoT Automatizzata">
+    <meta property="og:description" content="La prima piattaforma Agentless per la sicurezza IoT. Guarda la demo.">
+    <meta property="og:image" content="avatar.png">
+    <meta property="og:url" content="https://certifiot-demo.netlify.app">
+
+    <!-- FONTS -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <style>
         /* --- VARIABLES & RESET --- */
         :root {
-            --bg-dark: #0f172a; /* Blu scurissimo */
+            --bg-dark: #0f172a;
             --bg-card: #1e293b;
-            --primary: #3b82f6; /* Blu elettrico */
-            --accent: #06b6d4; /* Ciano */
+            --primary: #3b82f6;
+            --accent: #06b6d4;
             --success: #10b981;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
@@ -44,12 +56,16 @@
         .btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 40px rgba(59, 130, 246, 0.8); }
 
         /* --- NAVBAR --- */
-        nav { padding: 20px 0; position: fixed; width: 100%; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        nav { padding: 15px 0; position: fixed; width: 100%; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 22px; font-weight: 700; display: flex; align-items: center; gap: 10px; color: white; text-decoration: none;}
-        .logo i { color: var(--primary); }
+        
+        .logo img { 
+            height: 40px; /* Ridotto leggermente per mobile */
+            width: auto; 
+            vertical-align: middle;
+        }
 
-        /* --- HERO SECTION (VIDEO FOCUSED) --- */
+        /* --- HERO SECTION --- */
         .hero {
             padding: 140px 0 80px 0;
             text-align: center;
@@ -63,12 +79,8 @@
 
         .hero p { font-size: 20px; color: var(--text-muted); max-width: 700px; margin: 0 auto 40px auto; }
 
-        /* VIDEO CONTAINER */
-/* --- NUOVI STILI PER IL VIDEO OVERLAY --- */
-        
-        /* Assicura che il wrapper sia il riferimento per il posizionamento assoluto */
+        /* --- VIDEO CONTAINER --- */
         .video-wrapper {
-            /* Manteniamo le tue regole esistenti */
             position: relative;
             max-width: 900px;
             margin: 0 auto 50px auto;
@@ -78,68 +90,45 @@
             border: 1px solid rgba(255,255,255,0.1);
             background: #000;
             aspect-ratio: 16/9;
-            /* Aggiungiamo il cursore pointer */
             cursor: pointer; 
         }
 
-        /* L'overlay scuro che copre il video prima del click */
         .play-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.6); /* Sfondo blu scuro semi-trasparente */
+            background: rgba(15, 23, 42, 0.6);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            z-index: 10; /* Sta sopra il video */
+            z-index: 10;
             transition: all 0.4s ease;
         }
 
-        /* Il cerchio attorno all'icona play */
         .play-btn-circle {
-            width: 100px; height: 100px;
+            width: 90px; height: 90px;
             background: rgba(255,255,255,0.05);
             border: 3px solid var(--primary);
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            font-size: 40px; color: white;
+            font-size: 35px; color: white;
             transition: all 0.3s ease;
             box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
             backdrop-filter: blur(5px);
         }
         
-        /* Icona leggermente spostata per centrarla visivamente */
-        .play-btn-circle i { margin-left: 8px; }
+        .play-btn-circle i { margin-left: 6px; }
 
-        /* EFFETTI HOVER: Quando passi il mouse sopra il video */
         .video-wrapper:hover .play-btn-circle {
-            transform: scale(1.15);
+            transform: scale(1.1);
             background: var(--primary);
-            box-shadow: 0 0 60px rgba(59, 130, 246, 0.8), inset 0 0 20px rgba(255,255,255,0.5);
+            box-shadow: 0 0 60px rgba(59, 130, 246, 0.8);
             border-color: white;
         }
-        .video-wrapper:hover .play-overlay {
-             background: rgba(15, 23, 42, 0.3); /* L'overlay diventa più chiaro */
-        }
+        .video-wrapper:hover .play-overlay { background: rgba(15, 23, 42, 0.3); }
 
-        /* Classe per far sparire l'overlay quando si clicca */
-        .hide-overlay {
-            opacity: 0;
-            pointer-events: none; /* Evita che si possa ricliccare mentre è nascosto */
-            visibility: hidden;
-        }
+        .hide-overlay { opacity: 0; pointer-events: none; visibility: hidden; }
         
-        /* Overlay finto player se non c'è video */
-        .video-placeholder {
-            display: flex; flex-direction: column; align-items: center; color: white;
-        }
-        .play-btn {
-            width: 80px; height: 80px; background: rgba(255,255,255,0.1); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; font-size: 30px;
-            border: 2px solid white; transition: 0.3s; cursor: pointer;
-        }
-        .play-btn:hover { background: var(--primary); border-color: var(--primary); transform: scale(1.1); }
-
         /* --- FORM SECTION --- */
         .cta-form-container {
             background: var(--bg-card); padding: 40px; border-radius: 16px; max-width: 600px; margin: 0 auto;
@@ -155,7 +144,13 @@
         /* --- PARTNERS LOGOS --- */
         .partners { padding: 60px 0; text-align: center; opacity: 0.6; border-top: 1px solid rgba(255,255,255,0.05); }
         .partners p { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; color: var(--text-muted); }
-        .logo-row { display: flex; justify-content: center; gap: 50px; font-family: 'Space Grotesk'; font-weight: 700; font-size: 20px; }
+        
+        /* Fix per i loghi su mobile: flex-wrap */
+        .logo-row { 
+            display: flex; justify-content: center; gap: 50px; 
+            font-family: 'Space Grotesk'; font-weight: 700; font-size: 20px;
+            flex-wrap: wrap; /* Importante per mobile */
+        }
 
         /* --- VALUE PROP CARDS --- */
         .features { padding: 80px 0; }
@@ -169,6 +164,17 @@
         .card h3 { margin-bottom: 10px; }
         .card p { color: var(--text-muted); font-size: 15px; }
 
+        /* --- MOBILE RESPONSIVENESS (MEDIA QUERIES) --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+            .hero { padding-top: 120px; }
+            .grid { grid-template-columns: 1fr; } /* Le card vanno una sotto l'altra */
+            .input-group { flex-direction: column; } /* Il form diventa verticale */
+            .btn { width: 100%; text-align: center; }
+            .logo img { height: 35px; }
+            .logo-row { gap: 30px; font-size: 16px; }
+        }
+
     </style>
 </head>
 <body>
@@ -176,10 +182,12 @@
     <!-- NAV -->
     <nav>
         <div class="container nav-content">
+            <!-- LOGO MULINI -->
             <a href="#" class="logo">
-                <img src="logo mulini.png" alt="Mulini CertifIoT Logo" style="height: 45px; width: auto;">
+                <img src="logo mulini.png" alt="Mulini CertifIoT Logo">
             </a>
-            <a href="#access" class="btn btn-primary" style="padding: 8px 20px; font-size: 14px;">Richiedi Accesso</a>
+            <!-- CTA ridotta su mobile -->
+            <a href="#access" class="btn btn-primary" style="padding: 10px 20px; font-size: 14px;">Accesso Beta</a>
         </div>
     </nav>
 
@@ -194,8 +202,9 @@
 
             <div class="video-wrapper" onclick="playVideo()">
                 
+                <!-- VIDEO (Sostituisci src se necessario) -->
                 <video id="promoVideo" width="100%" height="100%" controls playsinline poster="avatar.png" style="object-fit: cover;">
-                    <source src="CertifIoT_ Conformità IoT video.mp4" type="video/mp4">
+                    <source src="video.mp4" type="video/mp4">
                     Il tuo browser non supporta il tag video.
                 </video> 
 
@@ -215,7 +224,11 @@
                 
                 <form action="https://formsubmit.co/loregiovanni01@gmail.com" method="POST" class="input-group">
                     
-                    <input type="hidden" name="_subject" value="Nuova richiesta da CertifIoT!"> <input type="hidden" name="_next" value="https://oigrol.github.io/certifiot-mvp/grazie.html"> <input type="hidden" name="_captcha" value="false"> <input type="text" name="_honey" style="display:none"> <input type="email" name="email" class="email-input" placeholder="La tua email aziendale..." required>
+                    <input type="hidden" name="_subject" value="Nuova richiesta da CertifIoT!"> 
+                    <input type="hidden" name="_next" value="https://oigrol.github.io/certifiot-mvp/grazie.html"> 
+                    <input type="hidden" name="_captcha" value="false"> 
+                    <input type="text" name="_honey" style="display:none"> 
+                    <input type="email" name="email" class="email-input" placeholder="La tua email aziendale..." required>
                     
                     <button type="submit" class="btn btn-primary">Richiedi Info</button>
                 </form>
@@ -270,8 +283,6 @@
         var video = document.getElementById("promoVideo");
         var overlay = document.getElementById("videoOverlay");
         
-        // Controlliamo se l'overlay è visibile. Se sì, lo nascondiamo e facciamo partire il video.
-        // Una volta nascosto, non tornerà più.
         if (!overlay.classList.contains("hide-overlay")) {
              video.play();
              overlay.classList.add("hide-overlay");
@@ -280,24 +291,4 @@
     </script>
 
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
